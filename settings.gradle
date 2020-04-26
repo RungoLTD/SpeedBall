@@ -1,0 +1,2 @@
+rootProject.name='SpeedBall'
+include ':app'
