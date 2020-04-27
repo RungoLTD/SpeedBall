@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SpeedBall</string>
+    
+    <string name="main_start">Старт</string>
+    <string name="main_calculate_distance">Отмерить дистанцию</string>
 </resources>
