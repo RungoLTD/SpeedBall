@@ -3,4 +3,8 @@
     
     <string name="main_start">Старт</string>
     <string name="main_calculate_distance">Отмерить дистанцию</string>
+
+    <string name="alert_title">Внимание!</string>
+    <string name="alert_message">Для вычисления скорости удара необходимы разрешения на "Камеру", "Звука" и "Записи"</string>
+    <string name="alert_ok">Ок</string>
 </resources>
