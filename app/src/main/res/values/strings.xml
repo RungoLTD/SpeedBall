@@ -7,4 +7,9 @@
     <string name="alert_title">Внимание!</string>
     <string name="alert_message">Для вычисления скорости удара необходимы разрешения на "Камеру", "Звука" и "Записи"</string>
     <string name="alert_ok">Ок</string>
+    <string name="ball_speed">Скорость мяча</string>
+    <string name="emoji">\ue415\ue056\ue057</string>
+    
+    <string name="close">Закрыть</string>
+    <string name="share">Поделиться</string>
 </resources>
