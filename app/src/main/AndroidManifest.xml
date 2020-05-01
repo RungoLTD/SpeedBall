@@ -41,7 +41,8 @@
             android:name=".features.statistics.StatisticActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".features.speedball.SpeedBallActivity" />
+        <activity android:name=".features.speedball.SpeedBallActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

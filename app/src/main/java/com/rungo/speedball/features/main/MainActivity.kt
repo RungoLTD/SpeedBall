@@ -1,6 +1,7 @@
 package com.rungo.speedball.features.main
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -8,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivityMainBinding
 import com.rungo.speedball.features.base.BaseActivity
+import com.rungo.speedball.features.speedball.SpeedBallActivity
 import com.rungo.speedball.utils.Constants
 import com.rungo.speedball.utils.showToast
 
@@ -24,7 +26,7 @@ class MainActivity : BaseActivity() {
     private fun setupListeners() {
         binding.btnStart.setOnClickListener {
             if (checkPermissions()) {
-                showToast("CAMERA SCREEN")
+                openSpeedBallScreen()
             } else {
                 AlertDialog.Builder(this)
                     .setTitle(R.string.alert_title)
@@ -94,8 +96,13 @@ class MainActivity : BaseActivity() {
             if (grantResults.any {it != PackageManager.PERMISSION_GRANTED }) {
                 showToast("FAIL")
             } else {
-                showToast("SUCCESS")
+                openSpeedBallScreen()
             }
         }
+    }
+
+    private fun openSpeedBallScreen() {
+        val intent = Intent(this, SpeedBallActivity::class.java)
+        startActivity(intent)
     }
 }
