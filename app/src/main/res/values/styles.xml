@@ -16,4 +16,9 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+    <style name="AppThemeTwo" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/colorGray</item>
+        <item name="android:colorControlNormal">#666666</item>
+    </style>
 </resources>

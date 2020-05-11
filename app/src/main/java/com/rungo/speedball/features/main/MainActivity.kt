@@ -9,18 +9,25 @@ import androidx.core.app.ActivityCompat
 import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivityMainBinding
 import com.rungo.speedball.features.base.BaseActivity
+import com.rungo.speedball.features.settings.SettingsDialogFragment
 import com.rungo.speedball.features.speedball.SpeedBallActivity
 import com.rungo.speedball.utils.Constants
 import com.rungo.speedball.utils.showToast
+import org.koin.android.viewmodel.ext.android.getViewModel
 
 class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by binding(R.layout.activity_main)
 
+    private val viewModel by lazy { getViewModel<MainViewModel>() }
+
+    private val settingsDialog by lazy { SettingsDialogFragment() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupListeners()
+        viewModel.setSensitive()
     }
 
     private fun setupListeners() {
@@ -45,7 +52,9 @@ class MainActivity : BaseActivity() {
         }
 
         binding.ivSettings.setOnClickListener {
-            showToast("SETTINGS")
+            if (!settingsDialog.isVisible) {
+                settingsDialog.show(supportFragmentManager, null)
+            }
         }
 
         binding.ivStatistics.setOnClickListener {
@@ -68,18 +77,31 @@ class MainActivity : BaseActivity() {
 
     private fun checkPermissions(): Boolean {
         return when {
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED -> {
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED -> {
                 false
             }
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED -> {
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED -> {
                 false
             }
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED -> {
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED -> {
                 false
             }
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED -> {
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED -> {
                 false
-            } else -> {
+            }
+            else -> {
                 true
             }
         }
@@ -93,7 +115,7 @@ class MainActivity : BaseActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == Constants.REQUEST_CODE && grantResults.isNotEmpty()) {
-            if (grantResults.any {it != PackageManager.PERMISSION_GRANTED }) {
+            if (grantResults.any { it != PackageManager.PERMISSION_GRANTED }) {
                 showToast("FAIL")
             } else {
                 openSpeedBallScreen()

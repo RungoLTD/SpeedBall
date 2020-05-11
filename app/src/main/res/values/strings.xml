@@ -17,4 +17,8 @@
     <string name="main_tip_1">1 - Измерьте \nдистанцию (10 м.)</string>
     <string name="main_tip_2">2 - Ударьте</string>
     <string name="cancel">Отмена</string>
+    <string name="settings">Настройки</string>
+    <string name="sensitive_microphone">Чувствительность микрофона</string>
+    <string name="measurement">Единица измерения</string>
+    <string name="save">Сохранить</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.rungo.speedball
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.rungo.speedball.di.persistenceModule
 import com.rungo.speedball.di.repositoryModule
 import com.rungo.speedball.di.viewModelModule
@@ -14,6 +15,7 @@ class App : Application() {
         super.onCreate()
         setupTimber()
         setupModules()
+        AndroidThreeTen.init(this);
     }
 
     private fun setupTimber() {

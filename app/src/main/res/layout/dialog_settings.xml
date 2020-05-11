@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/settings"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_close" />
+
+                <TextView
+                    android:id="@+id/tvMicrophone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvSettings"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/sensitive_microphone"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/sbSensitive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvMicrophone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="20dp"
+                    android:max="100"
+                    android:progress="70"
+                    android:theme="@style/AppThemeTwo"
+                    android:thumb="@drawable/ic_ball" />
+
+                <TextView
+                    android:id="@+id/tvMeasurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/sbSensitive"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="24dp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="@string/measurement"/>
+
+                <jp.pocket7878.switcherview.SwitcherView
+                    android:id="@+id/switchToggle"
+                    android:layout_below="@id/tvMeasurement"
+                    app:sv_background_color="@color/colorGray"
+                    app:sv_leftmost_hover_color="@android:color/white"
+                    app:sv_rightmost_hover_color="@android:color/white"
+                    app:sv_left_choice_text="км/ч"
+                    app:sv_right_choice_text="миль/ч"
+                    app:sv_enable_choice_tint_color="@android:color/black"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_below="@id/switchToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginBottom="26dp"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/ic_button_distance"/>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </layout>

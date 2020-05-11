@@ -2,26 +2,23 @@ package com.rungo.speedball.features.speedball.fragments
 
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.hardware.display.DisplayManager
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
+import androidx.navigation.fragment.NavHostFragment
 import com.rungo.speedball.R
+import com.rungo.speedball.data.model.Result
 import com.rungo.speedball.databinding.FragmentCameraBinding
 import com.rungo.speedball.features.base.BaseFragment
 import com.rungo.speedball.features.speedball.SpeedBallActivity
@@ -30,11 +27,10 @@ import com.rungo.speedball.features.speedball.SpeedBallActivity.Companion.PHOTO_
 import com.rungo.speedball.features.speedball.SpeedBallActivity.Companion.RATIO_16_9_VALUE
 import com.rungo.speedball.features.speedball.SpeedBallActivity.Companion.RATIO_4_3_VALUE
 import com.rungo.speedball.features.speedball.SpeedBallActivity.Companion.createFile
-import com.rungo.speedball.utils.ANIMATION_FAST_MILLIS
-import com.rungo.speedball.utils.ANIMATION_SLOW_MILLIS
-import com.rungo.speedball.utils.LuminosityAnalyzer
-import com.tarek360.instacapture.Instacapture
-import com.tarek360.instacapture.listener.ScreenCaptureListener
+import com.rungo.speedball.features.speedball.SpeedBallViewModel
+import com.rungo.speedball.utils.*
+import org.koin.android.viewmodel.ext.android.getViewModel
+import org.threeten.bp.LocalDateTime
 import timber.log.Timber
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -42,9 +38,8 @@ import java.util.concurrent.Executors
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.reflect.KProperty
 
-class CameraFragment : BaseFragment() {
+class CameraFragment : BaseFragment(), SpeedManagerListener {
 
     private lateinit var binding: FragmentCameraBinding
 
@@ -58,8 +53,14 @@ class CameraFragment : BaseFragment() {
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private lateinit var speedManager: SpeedManager
+
     private val displayManager by lazy {
         requireContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+    }
+
+    private val viewModel by lazy {
+        getViewModel<SpeedBallViewModel>()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,6 +84,12 @@ class CameraFragment : BaseFragment() {
             updateCameraUi()
             bindCameraUseCases()
         }
+
+        speedManager = SpeedManager(requireActivity(), viewModel.sensitive!!, this)
+
+        Toast.makeText(requireContext(), viewModel.sensitive.toString(), Toast.LENGTH_LONG).show()
+
+        Thread(speedManager).start()
     }
 
     private fun bindCameraUseCases() {
@@ -163,17 +170,19 @@ class CameraFragment : BaseFragment() {
 
             it.takePicture(outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    openResultScreen()
+                    val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
+
+                    openResultScreen(savedUri)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_LONG).show()
+                    Timber.d(exception)
                 }
             })
         }
     }
 
-    private fun openResultScreen() {
+    private fun openResultScreen(uri: Uri) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             binding.cameraContainer.postDelayed({
                 binding.cameraContainer.foreground = ColorDrawable(Color.WHITE)
@@ -182,7 +191,11 @@ class CameraFragment : BaseFragment() {
             }, ANIMATION_SLOW_MILLIS)
         }
 
+        viewModel.setUriImage(uri)
 
+        Thread(speedManager).interrupt()
+
+        NavHostFragment.findNavController(this).navigate(R.id.resultFragment)
     }
 
     private fun aspectRatio(width: Int, height: Int): Int {
@@ -214,5 +227,43 @@ class CameraFragment : BaseFragment() {
         super.onDestroyView()
         cameraExecutor.shutdown()
         displayManager.unregisterDisplayListener(displayListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Thread(speedManager).interrupt()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Thread(speedManager).interrupt()
+    }
+
+    override fun requestPermission() {
+
+    }
+
+    override fun onError(error: String?) {
+
+    }
+
+    override fun didDetectedFirstTime() {
+        try {
+            Timber.d("WAITING SECOND HIT")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun didDetectedLastTime(firstTime: Long, lastTime: Long, delay: Long) {
+        val finalSpeed = (10f / (delay.toFloat() / 100) * 3.6f).toInt()
+
+        val result = Result(finalSpeed, LocalDateTime.now())
+
+        viewModel.setResult(result)
+
+        Timber.d("LAST TIME RESULT $result")
+
+        takePicture()
     }
 }
