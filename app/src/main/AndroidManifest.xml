@@ -42,7 +42,8 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".features.speedball.SpeedBallActivity"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/CameraTheme"
+            android:screenOrientation="fullSensor"/>
     </application>
 
 </manifest>

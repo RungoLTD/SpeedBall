@@ -11,11 +11,74 @@
         tools:context=".features.main.MainActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             app:srcCompat="@drawable/ic_logo"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ivLogo"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/measure_ball_speed"/>
+
+        <TextView
+            android:id="@+id/tvInstruction"
+            android:layout_below="@id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            android:text="@string/instruction"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFirstTip"
+            android:layout_below="@id/tvInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="146dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="80dp"
+            android:src="@drawable/ic_measure_distance"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivFirstTip"
+            android:textColor="@android:color/white"
+            android:layout_alignStart="@id/btnStart"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/main_tip_1"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSecondTip"
+            android:layout_below="@id/tvInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_kick"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivFirstTip"
+            android:textColor="@android:color/white"
+            android:layout_alignEnd="@id/btnStart"
+            android:layout_alignStart="@id/ivSecondTip"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:text="@string/main_tip_2"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStart"
@@ -23,8 +86,8 @@
             android:layout_height="wrap_content"
             android:text="@string/main_start"
             android:textStyle="bold"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginEnd="42dp"
             android:layout_marginBottom="18dp"
             android:layout_above="@id/btnCalculate"
             android:textColor="@android:color/white"
@@ -36,8 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/main_calculate_distance"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginEnd="42dp"
             android:layout_marginBottom="32dp"
             android:textStyle="bold"
             android:drawableStart="@drawable/ic_linear"

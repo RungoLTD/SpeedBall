@@ -75,6 +75,11 @@ dependencies {
     implementation "androidx.camera:camera-camera2:1.0.0-beta03"
     implementation "androidx.camera:camera-lifecycle:1.0.0-beta03"
     implementation "androidx.camera:camera-view:1.0.0-alpha10"
-    implementation "androidx.camera:camera-extensions:1.0.0-alpha10"
+    implementation "androidx.camera:camera-core:1.0.0-beta03"
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+
+
+    implementation "com.github.tarek360:instacapture:2.0.1"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 }

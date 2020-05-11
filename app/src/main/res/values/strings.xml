@@ -12,4 +12,9 @@
     
     <string name="close">Закрыть</string>
     <string name="share">Поделиться</string>
+    <string name="measure_ball_speed">Измерьте скорость мяча</string>
+    <string name="instruction">Инструкция</string>
+    <string name="main_tip_1">1 - Измерьте \nдистанцию (10 м.)</string>
+    <string name="main_tip_2">2 - Ударьте</string>
+    <string name="cancel">Отмена</string>
 </resources>

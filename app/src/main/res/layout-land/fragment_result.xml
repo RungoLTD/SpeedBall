@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@color/colorBlackTransparency"
+            android:layout_alignParentBottom="true">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="80dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_logo"/>
+
+            <TextView
+                android:id="@+id/tvSpeedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:layout_toEndOf="@id/ivLogo"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/ball_speed"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/tvSpeedCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_below="@id/tvSpeedTitle"
+                android:layout_alignStart="@id/tvSpeedTitle"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                tools:text="72,83" />
+
+            <TextView
+                android:id="@+id/tvSpeedParameter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:layout_alignBottom="@id/tvSpeedCount"
+                android:layout_below="@id/tvSpeedTitle"
+                android:layout_toEndOf="@id/tvSpeedCount"
+                android:layout_marginStart="2dp"
+                android:gravity="bottom"
+                tools:text="km/h"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/btnClose"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="38dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:text="Красава"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnClose"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="14dp"
+                android:layout_toStartOf="@id/btnShare"
+                android:layout_marginEnd="48dp"
+                android:text="@string/close"
+                android:textAllCaps="false"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:textColor="@android:color/white"
+                android:background="@drawable/ic_button_start"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnShare"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="14dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/share"
+                android:textAllCaps="false"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_share"
+                android:textColor="@android:color/white"
+                android:background="@drawable/ic_button_distance"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

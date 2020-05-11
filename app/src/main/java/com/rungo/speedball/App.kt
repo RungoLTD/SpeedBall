@@ -1,14 +1,19 @@
 package com.rungo.speedball
 
 import android.app.Application
+import com.rungo.speedball.di.persistenceModule
+import com.rungo.speedball.di.repositoryModule
+import com.rungo.speedball.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         setupTimber()
+        setupModules()
     }
 
     private fun setupTimber() {
@@ -21,6 +26,15 @@ class App : Application() {
                     super.log(priority, newTag, message, t)
                 }
             })
+        }
+    }
+
+    private fun setupModules() {
+        startKoin {
+            androidContext(this@App)
+            modules(persistenceModule)
+            modules(repositoryModule)
+            modules(viewModelModule)
         }
     }
 }
