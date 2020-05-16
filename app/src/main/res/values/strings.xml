@@ -31,4 +31,7 @@
     <string name="alert_message_gps">Для измерении дистанции необходимы разрешения GPS</string>
     <string name="start_and_move">Нажмите на кнопку Старт и пройдите прямо 10 метров</string>
     <string name="move">Пройдите прямо 10 метров</string>
+
+    <string name="admob_id_release">ca-app-pub-5203994867346463/9404883706</string>
+    <string name="admob_id_debug">ca-app-pub-3940256099942544/1033173712</string>
 </resources>

@@ -26,6 +26,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.rungo.speedball.BuildConfig
 import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivitySpeedballBinding
 import com.rungo.speedball.features.base.BaseActivity
@@ -54,9 +58,23 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
         getViewModel<SpeedBallViewModel>()
     }
 
+    private var isRotate: Boolean = false
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupNavigation()
+        MobileAds.initialize(this) {}
+        mInterstitialAd = InterstitialAd(this)
+
+        if (BuildConfig.DEBUG) {
+            mInterstitialAd.adUnitId = getString(R.string.admob_id_debug)
+        } else {
+            mInterstitialAd.adUnitId = getString(R.string.admob_id_release)
+        }
+
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
     }
 
     private fun setupNavigation() {
@@ -101,6 +119,14 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
 
     override fun onDestroy() {
         super.onDestroy()
+        deleteFile()
+        if (isFinishing) {
+            mInterstitialAd.show()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
         deleteFile()
     }
 }
