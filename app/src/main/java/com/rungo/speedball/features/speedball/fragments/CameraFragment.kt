@@ -170,7 +170,15 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
 
-                    openResultScreen(savedUri)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        binding.cameraContainer.postDelayed({
+                            binding.cameraContainer.foreground = ColorDrawable(Color.WHITE)
+                            binding.cameraContainer.postDelayed(
+                                { binding.cameraContainer.foreground = null }, ANIMATION_FAST_MILLIS)
+                        }, ANIMATION_SLOW_MILLIS)
+                    }
+
+                    viewModel.setUriImage(savedUri)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -180,16 +188,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
         }
     }
 
-    private fun openResultScreen(uri: Uri) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            binding.cameraContainer.postDelayed({
-                binding.cameraContainer.foreground = ColorDrawable(Color.WHITE)
-                binding.cameraContainer.postDelayed(
-                    { binding.cameraContainer.foreground = null }, ANIMATION_FAST_MILLIS)
-            }, ANIMATION_SLOW_MILLIS)
-        }
-
-        viewModel.setUriImage(uri)
+    private fun openResultScreen() {
 
         Thread(speedManager).interrupt()
 
@@ -247,7 +246,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
     override fun didDetectedFirstTime() {
         try {
-            Timber.d("WAITING SECOND HIT")
+            takePicture()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -259,9 +258,6 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
         val result = Result(speed = finalSpeed, date = LocalDateTime.now())
 
         viewModel.setResult(result)
-
-        Timber.d("LAST TIME RESULT $result")
-
-        takePicture()
+        openResultScreen()
     }
 }
