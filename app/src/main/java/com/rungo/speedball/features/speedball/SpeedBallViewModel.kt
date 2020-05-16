@@ -1,7 +1,9 @@
 package com.rungo.speedball.features.speedball
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.rungo.speedball.data.model.CustomPair
 import com.rungo.speedball.data.model.Result
 import com.rungo.speedball.data.repository.SpeedBallRepository
 import com.rungo.speedball.features.base.BaseViewModel
@@ -12,6 +14,9 @@ class SpeedBallViewModel constructor(
 ) : BaseViewModel() {
 
     var sensitive = repository.getSensitive()
+
+    var isPhotoCompleted = MutableLiveData<Boolean>().apply { value = false }
+    var isSpeedDetected = MutableLiveData<Boolean>().apply { value = false }
 
     fun setUriImage(uri: Uri) {
         repository.uri = uri

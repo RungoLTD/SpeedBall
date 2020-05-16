@@ -12,10 +12,10 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.rungo.speedball.R
 import com.rungo.speedball.data.model.Result
@@ -55,6 +55,8 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
     private lateinit var speedManager: SpeedManager
 
+    private lateinit var photoFile: File
+
     private val displayManager by lazy {
         requireContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
     }
@@ -71,6 +73,8 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        setupDefaultValues()
+        setupObservers()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -87,7 +91,25 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
         speedManager = SpeedManager(requireActivity(), viewModel.sensitive, this)
 
+        photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
+
         Thread(speedManager).start()
+    }
+
+    private fun setupObservers() {
+        viewModel.apply {
+            isPhotoCompleted.observe(viewLifecycleOwner, Observer {
+                if (it && isSpeedDetected.value!!) {
+                    openResultScreen()
+                }
+            })
+
+            isSpeedDetected.observe(viewLifecycleOwner, Observer {
+                if (it && isPhotoCompleted.value!!) {
+                    openResultScreen()
+                }
+            })
+        }
     }
 
     private fun bindCameraUseCases() {
@@ -169,6 +191,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
             it.takePicture(outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
+                    viewModel.setUriImage(savedUri)
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         binding.cameraContainer.postDelayed({
@@ -178,7 +201,9 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
                         }, ANIMATION_SLOW_MILLIS)
                     }
 
-                    viewModel.setUriImage(savedUri)
+                    requireActivity().runOnUiThread {
+                        viewModel.isPhotoCompleted.value = true
+                    }
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -253,11 +278,17 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     }
 
     override fun didDetectedLastTime(firstTime: Long, lastTime: Long, delay: Long) {
-        val finalSpeed = (10f / (delay.toFloat() / 100) * 3.6f).toInt()
+        val finalSpeed = (100f / (delay.toFloat() / 100) * 3.6f).toInt()
 
         val result = Result(speed = finalSpeed, date = LocalDateTime.now())
-
         viewModel.setResult(result)
-        openResultScreen()
+        viewModel.isSpeedDetected.value = true
+    }
+
+    private fun setupDefaultValues() {
+        viewModel.apply {
+            isPhotoCompleted.value = false
+            isSpeedDetected.value = false
+        }
     }
 }

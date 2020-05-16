@@ -40,11 +40,13 @@ class StatisticActivity : BaseActivity() {
 
     private fun setupObservers() {
         viewModel.resultList.observe(this, Observer {
-            if (it != null) {
-                adapter.setList(it)
-                binding.tvEmptyTitle.visibility = View.GONE
-            } else {
-                binding.tvEmptyTitle.visibility = View.VISIBLE
+            it?.let {
+                if (it.isNotEmpty()) {
+                    adapter.setList(it)
+                    binding.tvEmptyTitle.visibility = View.GONE
+                } else {
+                    binding.tvEmptyTitle.visibility = View.VISIBLE
+                }
             }
         })
     }
