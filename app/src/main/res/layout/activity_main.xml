@@ -1,140 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main"
-        tools:context=".features.main.MainActivity">
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            app:srcCompat="@drawable/ic_logo"/>
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/ivLogo"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:text="@string/measure_ball_speed"/>
-
-        <TextView
-            android:id="@+id/tvInstruction"
-            android:layout_below="@id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:textSize="16sp"
-            android:text="@string/instruction"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivFirstTip"
-            android:layout_below="@id/tvInstruction"
-            android:layout_width="wrap_content"
-            android:layout_height="146dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="80dp"
-            android:src="@drawable/ic_measure_distance"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivFirstTip"
-            android:textColor="@android:color/white"
-            android:layout_alignStart="@id/btnStart"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/main_tip_1"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivSecondTip"
-            android:layout_below="@id/tvInstruction"
-            android:layout_width="wrap_content"
-            android:layout_height="140dp"
-            android:layout_marginTop="32dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_kick"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivFirstTip"
-            android:textColor="@android:color/white"
-            android:layout_alignEnd="@id/btnStart"
-            android:layout_alignStart="@id/ivSecondTip"
-            android:gravity="center"
-            android:layout_marginTop="24dp"
-            android:text="@string/main_tip_2"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnStart"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_start"
-            android:textStyle="bold"
-            android:layout_marginStart="42dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="18dp"
-            android:layout_above="@id/btnCalculate"
-            android:textColor="@android:color/white"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:background="@drawable/ic_button_start"/>
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_main"
+            android:orientation="vertical"
+            tools:context=".features.main.MainActivity">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCalculate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_calculate_distance"
-            android:layout_marginStart="42dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="32dp"
-            android:textStyle="bold"
-            android:drawableStart="@drawable/ic_linear"
-            android:paddingStart="16dp"
-            android:paddingEnd="32dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_above="@id/ivSettings"
-            android:textColor="@android:color/white"
-            android:background="@drawable/ic_button_distance"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/ic_logo" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="48dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:srcCompat="@drawable/ic_settings"/>
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/measure_ball_speed"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivStatistics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="24dp"
-            android:layout_marginEnd="48dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:srcCompat="@drawable/ic_rating"/>
+            <TextView
+                android:id="@+id/tvInstruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:text="@string/instruction"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivFirstTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="146dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/ic_measure_distance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivFirstTip"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/main_tip_1"
+                    android:textColor="@android:color/white" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivSecondTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:src="@drawable/ic_kick" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivFirstTip"
+                    android:layout_alignStart="@id/ivSecondTip"
+                    android:layout_alignEnd="@id/ivSecondTip"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/main_tip_2"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginTop="42dp"
+                android:background="@drawable/ic_button_start"
+                android:text="@string/main_start"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCalculate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/ic_button_distance"
+                android:drawableStart="@drawable/ic_linear"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingStart="16dp"
+                android:paddingEnd="32dp"
+                android:text="@string/main_calculate_distance"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="24dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:srcCompat="@drawable/ic_settings" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivStatistics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:srcCompat="@drawable/ic_rating" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>
+

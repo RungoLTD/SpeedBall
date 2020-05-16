@@ -58,8 +58,6 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
         getViewModel<SpeedBallViewModel>()
     }
 
-    private var isRotate: Boolean = false
-
     private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -62,8 +62,7 @@ class SharedPreferencesProvider(
     }
 
     fun getSensitive(key: String): Int? {
-        return if (!sharedPreferences.contains(key)) null else
-            sharedPreferences.getInt(key, 50)
+        return sharedPreferences.getInt(key, 50)
     }
 
     fun getInt(key: String): Int? {
