@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.rungo.speedball.R
@@ -90,8 +91,6 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
         }
 
         speedManager = SpeedManager(requireActivity(), viewModel.sensitive, this)
-
-        photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
 
         Thread(speedManager).start()
     }

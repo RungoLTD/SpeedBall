@@ -26,8 +26,9 @@
     <string name="mile_h">миль/ч</string>
     <string name="database">SpeedBall.db</string>
     <string name="empty_data">Нету данных</string>
-    <string name="zero_meters">0 м.</string>
+    <string name="zero_meters">0,00 м.</string>
     <string name="gps_coordinate">Получение точных координатов GPS</string>
     <string name="alert_message_gps">Для измерении дистанции необходимы разрешения GPS</string>
     <string name="start_and_move">Нажмите на кнопку Старт и пройдите прямо 10 метров</string>
+    <string name="move">Пройдите прямо 10 метров</string>
 </resources>

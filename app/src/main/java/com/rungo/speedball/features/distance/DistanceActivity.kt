@@ -63,7 +63,7 @@ class DistanceActivity : BaseActivity(), LocationListener {
             this,
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION
             ),
             Constants.REQUEST_CODE
         )
@@ -75,7 +75,7 @@ class DistanceActivity : BaseActivity(), LocationListener {
                 finish()
                 return@setOnClickListener
             }
-
+            showToast(getString(R.string.move))
             binding.btnStartClose.text = getString(R.string.close)
             isStarted = true
         }

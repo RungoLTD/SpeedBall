@@ -33,6 +33,7 @@ import com.rungo.speedball.utils.*
 import com.tarek360.instacapture.Instacapture
 import com.tarek360.instacapture.listener.ScreenCaptureListener
 import kotlinx.android.synthetic.main.activity_speedball.*
+import org.koin.android.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -49,6 +50,10 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
 
     private val binding: ActivitySpeedballBinding by binding(R.layout.activity_speedball)
 
+    private val viewModel by lazy {
+        getViewModel<SpeedBallViewModel>()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupNavigation()
@@ -60,6 +65,16 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
         }, IMMERSIVE_FLAG_TIMEOUT)
     }
 
+    private fun deleteFile() {
+        viewModel.getUriImage()?.let {
+            if (it.path != null) {
+                val deleteFile = File(it.path!!)
+                if (deleteFile.exists()) {
+                    deleteFile.canonicalFile.delete()
+                }
+            }
+        }
+    }
 
     companion object {
         const val FILENAME = "yyyy-MM-dd-HH-mm-ss-SSS"
@@ -82,5 +97,10 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
             return if (mediaDir != null && mediaDir.exists())
                 mediaDir else appContext.filesDir
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        deleteFile()
     }
 }
