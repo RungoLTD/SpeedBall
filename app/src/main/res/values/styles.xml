@@ -21,4 +21,8 @@
         <item name="android:colorControlActivated">@color/colorGray</item>
         <item name="android:colorControlNormal">#666666</item>
     </style>
+
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 </resources>

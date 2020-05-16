@@ -12,6 +12,7 @@ import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivityMainBinding
 import com.rungo.speedball.databinding.DialogSettingsBinding
 import com.rungo.speedball.features.base.BaseActivity
+import com.rungo.speedball.features.distance.DistanceActivity
 import com.rungo.speedball.features.speedball.SpeedBallActivity
 import com.rungo.speedball.features.statistics.StatisticActivity
 import com.rungo.speedball.utils.Constants
@@ -69,13 +70,15 @@ class MainActivity : BaseActivity() {
                         requestPermissions()
                         dialog?.dismiss()
                     }
+                    .setCancelable(false)
                     .create()
                     .show()
             }
         }
 
         binding.btnCalculate.setOnClickListener {
-            showToast("CALCULATE")
+            val intent = Intent(this, DistanceActivity::class.java)
+            startActivity(intent)
         }
 
         binding.ivSettings.setOnClickListener {
@@ -126,8 +129,7 @@ class MainActivity : BaseActivity() {
             arrayOf(
                 Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             ),
             Constants.REQUEST_CODE
         )
@@ -138,7 +140,6 @@ class MainActivity : BaseActivity() {
             ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED -> false
             ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED -> false
             ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED -> false
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED -> false
             else -> true
         }
     }
@@ -148,7 +149,7 @@ class MainActivity : BaseActivity() {
 
         if (requestCode == Constants.REQUEST_CODE && grantResults.isNotEmpty()) {
             if (grantResults.any { it != PackageManager.PERMISSION_GRANTED }) {
-                showToast("FAIL")
+                showToast(getString(R.string.alert_message))
             } else {
                 openSpeedBallScreen()
             }

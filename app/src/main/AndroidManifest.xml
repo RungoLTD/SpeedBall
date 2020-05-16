@@ -41,6 +41,10 @@
             android:name=".features.statistics.StatisticActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.distance.DistanceActivity"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".features.speedball.SpeedBallActivity"
             android:theme="@style/CameraTheme"
             android:screenOrientation="fullSensor"/>

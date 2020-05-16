@@ -8,8 +8,7 @@
     <string name="alert_message">Для вычисления скорости удара необходимы разрешения на "Камеру", "Звука" и "Записи"</string>
     <string name="alert_ok">Ок</string>
     <string name="ball_speed">Скорость мяча</string>
-    <string name="emoji">\ue415\ue056\ue057</string>
-    
+
     <string name="close">Закрыть</string>
     <string name="share">Поделиться</string>
     <string name="measure_ball_speed">Измерьте скорость мяча</string>
@@ -27,4 +26,8 @@
     <string name="mile_h">миль/ч</string>
     <string name="database">SpeedBall.db</string>
     <string name="empty_data">Нету данных</string>
+    <string name="zero_meters">0 м.</string>
+    <string name="gps_coordinate">Получение точных координатов GPS</string>
+    <string name="alert_message_gps">Для измерении дистанции необходимы разрешения GPS</string>
+    <string name="start_and_move">Нажмите на кнопку Старт и пройдите прямо 10 метров</string>
 </resources>

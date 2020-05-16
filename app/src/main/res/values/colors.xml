@@ -8,4 +8,5 @@
     <color name="colorGrayLight">#808080</color>
     <color name="colorBlackTransparency">#99000000</color>
     <color name="colorGrayBackground">#E5E5E5</color>
+    <color name="colorYellowTransparent">#99FFA800</color>
 </resources>
