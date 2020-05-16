@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rungo.speedball.R
-import com.rungo.speedball.data.model.getDescription
+import com.rungo.speedball.data.model.getSpeedEmoji
+import com.rungo.speedball.data.model.getSpeedStatus
+import com.rungo.speedball.data.model.getSpeedType
 import com.rungo.speedball.databinding.FragmentResultBinding
 import com.rungo.speedball.features.base.BaseFragment
 import com.rungo.speedball.features.speedball.SpeedBallViewModel
 import org.koin.android.viewmodel.ext.android.getViewModel
+import java.text.DecimalFormat
 
 class ResultFragment : BaseFragment() {
 
@@ -32,9 +35,23 @@ class ResultFragment : BaseFragment() {
 
         binding.ivResult.setImageURI(viewModel.getUriImage())
 
-        binding.tvSpeedCount.text = viewModel.getResult()?.speed.toString()
+        val speed = if (viewModel.getSpeedUnit()) {
+            viewModel.getResult()?.speed?.div(1.6).toString()
+        } else {
+            viewModel.getResult()?.speed.toString()
+        }
 
-        binding.tvStatus.text = viewModel.getResult()?.speed?.let { getDescription(it) }
+        binding.tvSpeedCount.text = speed
+
+        binding.tvStatus.text = viewModel.getResult()?.speed?.let {
+            getSpeedStatus(getSpeedType(it)) + " " + getSpeedEmoji(getSpeedType(it))
+        }
+
+        binding.tvSpeedParameter.text = if (viewModel.getSpeedUnit()) {
+            getString(R.string.mile_h)
+        } else {
+            getString(R.string.km_h)
+        }
     }
 
     private fun setupListeners() {

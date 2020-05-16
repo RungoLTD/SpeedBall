@@ -1,9 +1,11 @@
 package com.rungo.speedball.features.speedball
 
 import android.net.Uri
+import androidx.lifecycle.viewModelScope
 import com.rungo.speedball.data.model.Result
 import com.rungo.speedball.data.repository.SpeedBallRepository
 import com.rungo.speedball.features.base.BaseViewModel
+import kotlinx.coroutines.launch
 
 class SpeedBallViewModel constructor(
     private var repository: SpeedBallRepository
@@ -19,11 +21,18 @@ class SpeedBallViewModel constructor(
         return repository.uri
     }
 
-    fun setResult(result: Result) {
-        repository.result = result
-    }
-
     fun getResult(): Result? {
         return repository.result
+    }
+
+    fun getSpeedUnit(): Boolean {
+        return repository.getSpeedUnit()
+    }
+
+    fun setResult(result: Result) {
+        repository.result = result
+        viewModelScope.launch {
+            repository.setCurrentResult(result)
+        }
     }
 }

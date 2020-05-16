@@ -4,15 +4,19 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivityMainBinding
+import com.rungo.speedball.databinding.DialogSettingsBinding
 import com.rungo.speedball.features.base.BaseActivity
-import com.rungo.speedball.features.settings.SettingsDialogFragment
 import com.rungo.speedball.features.speedball.SpeedBallActivity
+import com.rungo.speedball.features.statistics.StatisticActivity
 import com.rungo.speedball.utils.Constants
 import com.rungo.speedball.utils.showToast
+import jp.pocket7878.switcherview.SwitcherView
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class MainActivity : BaseActivity() {
@@ -21,13 +25,36 @@ class MainActivity : BaseActivity() {
 
     private val viewModel by lazy { getViewModel<MainViewModel>() }
 
-    private val settingsDialog by lazy { SettingsDialogFragment() }
+    private val settingsDialog by lazy {
+        AlertDialog.Builder(this).create()
+    }
+
+    private val dialogBinding by lazy {
+        DialogSettingsBinding.inflate(LayoutInflater.from(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupListeners()
-        viewModel.setSensitive()
+        intiComponents()
+    }
+
+    private fun setPercent(progress: String): String {
+        return String.format("$progress %s", "%")
+    }
+
+    private fun intiComponents() {
+        viewModel.getSensitive()?.let {
+            dialogBinding.tvPercent.text = setPercent(it.toString())
+            dialogBinding.sbSensitive.progress = it
+        }
+
+        if (viewModel.getSpeedUnit()) {
+            dialogBinding.switchToggle.switchToRightChoice()
+        } else {
+            dialogBinding.switchToggle.switchToLeftChoice()
+        }
     }
 
     private fun setupListeners() {
@@ -52,14 +79,45 @@ class MainActivity : BaseActivity() {
         }
 
         binding.ivSettings.setOnClickListener {
-            if (!settingsDialog.isVisible) {
-                settingsDialog.show(supportFragmentManager, null)
-            }
+            settingsDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            settingsDialog.setView(dialogBinding.root)
+            settingsDialog.show()
         }
 
         binding.ivStatistics.setOnClickListener {
-            showToast("STATISTICS")
+            val intent = Intent(this, StatisticActivity::class.java)
+            startActivity(intent)
         }
+
+        dialogBinding.ivClose.setOnClickListener {
+            settingsDialog.dismiss()
+        }
+
+        dialogBinding.sbSensitive.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                dialogBinding.tvPercent.text = setPercent(progress.toString())
+                viewModel.setSensitive(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        dialogBinding.switchToggle.setOnSwitchSelectChangeListener(object : SwitcherView.OnSwitchSelectChangeListener {
+            override fun onFinishSwitchUserControl() {}
+
+            override fun onLeftChoiceSelected() {
+                viewModel.setSpeedUnit(false)
+            }
+
+            override fun onRightChoiceSelected() {
+                viewModel.setSpeedUnit(true)
+            }
+
+            override fun onStartSwitchUserControl() {}
+        })
     }
 
     private fun requestPermissions() {
@@ -77,41 +135,15 @@ class MainActivity : BaseActivity() {
 
     private fun checkPermissions(): Boolean {
         return when {
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.RECORD_AUDIO
-            ) != PackageManager.PERMISSION_GRANTED -> {
-                false
-            }
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED -> {
-                false
-            }
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED -> {
-                false
-            }
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED -> {
-                false
-            }
-            else -> {
-                true
-            }
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED -> false
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED -> false
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED -> false
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED -> false
+            else -> true
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == Constants.REQUEST_CODE && grantResults.isNotEmpty()) {

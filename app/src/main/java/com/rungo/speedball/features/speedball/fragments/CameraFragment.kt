@@ -85,9 +85,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
             bindCameraUseCases()
         }
 
-        speedManager = SpeedManager(requireActivity(), viewModel.sensitive!!, this)
-
-        Toast.makeText(requireContext(), viewModel.sensitive.toString(), Toast.LENGTH_LONG).show()
+        speedManager = SpeedManager(requireActivity(), viewModel.sensitive, this)
 
         Thread(speedManager).start()
     }
@@ -258,7 +256,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     override fun didDetectedLastTime(firstTime: Long, lastTime: Long, delay: Long) {
         val finalSpeed = (10f / (delay.toFloat() / 100) * 3.6f).toInt()
 
-        val result = Result(finalSpeed, LocalDateTime.now())
+        val result = Result(speed = finalSpeed, date = LocalDateTime.now())
 
         viewModel.setResult(result)
 

@@ -2,7 +2,7 @@ package com.rungo.speedball.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 class SharedPreferencesProvider(
     applicationContext: Context
@@ -76,9 +76,8 @@ class SharedPreferencesProvider(
             sharedPreferences.getLong(key, 0)
     }
 
-    fun getBoolean(key: String): Boolean? {
-        return if (!sharedPreferences.contains(key)) null else
-            sharedPreferences.getBoolean(key, false)
+    fun getBoolean(key: String): Boolean {
+        return sharedPreferences.getBoolean(key, false)
     }
 
     fun getFloat(key: String): Float? {

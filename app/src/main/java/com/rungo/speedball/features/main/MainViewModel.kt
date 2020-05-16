@@ -7,9 +7,19 @@ class MainViewModel(
     private val speedBallRepository: SpeedBallRepository
 ) : BaseViewModel() {
 
-    fun setSensitive() {
-        if (speedBallRepository.getSensitive() == null) {
-            speedBallRepository.setSensitive(50)
-        }
+    fun setSensitive(progress: Int) {
+        speedBallRepository.setSensitive(progress)
+    }
+
+    fun getSensitive(): Int? {
+        return speedBallRepository.getSensitive()
+    }
+
+    fun getSpeedUnit(): Boolean {
+        return speedBallRepository.getSpeedUnit()
+    }
+
+    fun setSpeedUnit(speedUnit: Boolean) {
+        speedBallRepository.setSpeedUnit(speedUnit)
     }
 }

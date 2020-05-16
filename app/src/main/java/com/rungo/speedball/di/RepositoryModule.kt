@@ -4,5 +4,5 @@ import com.rungo.speedball.data.repository.SpeedBallRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { SpeedBallRepository(get()) }
+    single { SpeedBallRepository(get(), get()) }
 }

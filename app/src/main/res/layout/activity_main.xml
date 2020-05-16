@@ -121,7 +121,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:srcCompat="@drawable/ic_rating"/>
+            app:srcCompat="@drawable/ic_settings"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivStatistics"

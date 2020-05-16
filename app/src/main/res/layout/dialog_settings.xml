@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,15 +60,25 @@
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="20dp"
                     android:max="100"
-                    android:progress="70"
+                    android:progress="50"
                     android:theme="@style/AppThemeTwo"
                     android:thumb="@drawable/ic_ball" />
+
+                <TextView
+                    android:id="@+id/tvPercent"
+                    android:layout_below="@id/sbSensitive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@android:color/black"
+                    tools:text="50%"
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:id="@+id/tvMeasurement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/sbSensitive"
+                    android:layout_below="@id/tvPercent"
                     android:layout_marginTop="40dp"
                     android:layout_marginStart="24dp"
                     android:textColor="@android:color/black"
@@ -86,20 +97,9 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_below="@id/switchToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginEnd="26dp"
-                    android:layout_marginTop="42dp"
-                    android:layout_marginBottom="26dp"
-                    android:text="@string/save"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/ic_button_distance"/>
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

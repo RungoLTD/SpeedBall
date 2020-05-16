@@ -21,4 +21,10 @@
     <string name="sensitive_microphone">Чувствительность микрофона</string>
     <string name="measurement">Единица измерения</string>
     <string name="save">Сохранить</string>
+    <string name="percent">%1$s, %</string>
+    
+    <string name="km_h">км/ч</string>
+    <string name="mile_h">миль/ч</string>
+    <string name="database">SpeedBall.db</string>
+    <string name="empty_data">Нету данных</string>
 </resources>

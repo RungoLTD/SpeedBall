@@ -1,14 +1,13 @@
 package com.rungo.speedball.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
 
+@Entity(tableName = "result")
 data class Result(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val speed: Int,
     val date: LocalDateTime
-) {
-
-    fun getFormattedDate(): String = date.format(formatter)
-}
-
-val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+)
