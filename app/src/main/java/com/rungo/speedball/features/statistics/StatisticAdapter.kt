@@ -42,7 +42,7 @@ class StatisticAdapter : RecyclerView.Adapter<StatisticAdapter.ViewHolder>() {
             speed
         }
 
-        return String.format("$currentSpeed %s - %s", getSpeedUnit(context, speedUnit), getSpeedStatus(speedType))
+        return String.format("$currentSpeed %s - %s", getSpeedUnit(context, speedUnit), getSpeedStatus(context, speedType))
     }
 
     inner class ViewHolder(private var binding: ItemStatisticBinding) : RecyclerView.ViewHolder(binding.root) {

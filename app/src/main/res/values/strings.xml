@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpeedBall</string>
+    <string name="app_name" translatable="false">SpeedBall</string>
     
     <string name="main_start">Старт</string>
     <string name="main_calculate_distance">Отмерить дистанцию</string>
@@ -20,18 +20,25 @@
     <string name="sensitive_microphone">Чувствительность микрофона</string>
     <string name="measurement">Единица измерения</string>
     <string name="save">Сохранить</string>
-    <string name="percent">%1$s, %</string>
-    
+
     <string name="km_h">км/ч</string>
     <string name="mile_h">миль/ч</string>
-    <string name="database">SpeedBall.db</string>
     <string name="empty_data">Нету данных</string>
-    <string name="zero_meters">0,00 м.</string>
     <string name="gps_coordinate">Получение точных координатов GPS</string>
     <string name="alert_message_gps">Для измерении дистанции необходимы разрешения GPS</string>
     <string name="start_and_move">Нажмите на кнопку Старт и пройдите прямо 10 метров</string>
     <string name="move">Пройдите прямо 10 метров</string>
 
-    <string name="admob_id_release">ca-app-pub-5203994867346463/9404883706</string>
-    <string name="admob_id_debug">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_id_release" translatable="false">ca-app-pub-5203994867346463/9404883706</string>
+    <string name="admob_id_debug" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="percent" translatable="false">%1$s, %</string>
+    <string name="zero_meters" translatable="false">0,00 M.</string>
+    <string name="database" translatable="false">SpeedBall.db</string>
+
+    <string name="sucks">Отстой</string>
+    <string name="fine">Нормально</string>
+    <string name="nice">Красава</string>
+    <string name="fire">Огонь</string>
+    <string name="gun">Пушка</string>
+    <string name="bullet">Пуля!</string>
 </resources>

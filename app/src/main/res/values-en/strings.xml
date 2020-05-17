@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_start">Start</string>
+    <string name="main_calculate_distance">Measure distance</string>
+    <string name="alert_title">Attention!</string>
+    <string name="alert_message">To calculate the speed of impact, you need permissions on the "Camera", "Sound" and "Recording"</string>
+    <string name="alert_ok">Ok</string>
+    <string name="ball_speed">Ball speed</string>
+    <string name="close">Close</string>
+    <string name="share">Share</string>
+    <string name="measure_ball_speed">Measure the speed of the ball</string>
+    <string name="instruction">Instruction manual</string>
+    <string name="main_tip_1">1 - Measure \nthe distance (10 m.)</string>
+    <string name="main_tip_2">2 - Hit</string>
+    <string name="cancel">Cancel</string>
+    <string name="settings">Settings</string>
+    <string name="sensitive_microphone">Microphone sensitivity</string>
+    <string name="measurement">unit of measurement</string>
+    <string name="save">Save</string>
+    <string name="km_h">km/h</string>
+    <string name="mile_h" >mph</string>
+    <string name="empty_data">No data</string>
+    <string name="start_and_move">Press the start button and go straight 10 meters</string>
+    <string name="gps_coordinate">Getting accurate GPS coordinates</string>
+    <string name="move">Walk straight 10 meters</string>
+    <string name="alert_message_gps">GPS resolution required to measure distance</string>
+
+    <string name="sucks">Sucks</string>
+    <string name="fine">Fine</string>
+    <string name="nice">Nice</string>
+    <string name="fire">Fire</string>
+    <string name="gun">A gun</string>
+    <string name="bullet">Bullet!</string>
+</resources>

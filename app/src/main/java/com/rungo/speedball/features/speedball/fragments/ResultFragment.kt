@@ -60,7 +60,7 @@ class ResultFragment : BaseFragment() {
         binding.tvSpeedCount.text = speed
 
         binding.tvStatus.text = viewModel.getResult()?.speed?.let {
-            getSpeedStatus(getSpeedType(it)) + " " + getSpeedEmoji(getSpeedType(it))
+            getSpeedStatus(requireContext(), getSpeedType(it)) + " " + getSpeedEmoji(getSpeedType(it))
         }
 
         binding.tvSpeedParameter.text = if (viewModel.getSpeedUnit()) {

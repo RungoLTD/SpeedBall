@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_start">comienzo</string>
+    <string name="main_calculate_distance">Medir la distancia</string>
+    <string name="alert_title">¡Atención!</string>
+    <string name="alert_message">Para calcular la velocidad del impacto, necesita permisos en la "Cámara", "Sonido" y "Grabación"</string>
+    <string name="alert_ok">Okay</string>
+    <string name="ball_speed">Velocidad de la bola</string>
+    <string name="close">Cerca</string>
+    <string name="share">Compartir</string>
+    <string name="measure_ball_speed">Medir la velocidad de la pelota</string>
+    <string name="instruction">Manual de instrucciones</string>
+    <string name="main_tip_1">1 - Medir \nla distancia (10 m.)</string>
+    <string name="main_tip_2">2 - Golpear</string>
+    <string name="cancel">Cancelar</string>
+    <string name="settings">Configuraciones</string>
+    <string name="sensitive_microphone">Sensibilidad del micrófono</string>
+    <string name="measurement">unidad de medida</string>
+    <string name="save">Salvar</string>
+    <string name="km_h">km/h</string>
+    <string name="mile_h" >mph</string>
+    <string name="empty_data">Sin datos</string>
+    <string name="start_and_move">Presione el botón de inicio y siga recto 10 metros</string>
+    <string name="gps_coordinate">Obteniendo coordenadas GPS precisas</string>
+    <string name="move">Caminar recto 10 metros</string>
+    <string name="alert_message_gps">Se requiere resolución de GPS para medir la distancia</string>
+
+    <string name="sucks">Apesta</string>
+    <string name="fine">Multa</string>
+    <string name="nice">agradable</string>
+    <string name="fire">Fuego</string>
+    <string name="gun">Un arma</string>
+    <string name="bullet">¡Bala!</string>
+</resources>

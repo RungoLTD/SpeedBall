@@ -14,14 +14,14 @@ fun getSpeedType(speed: Int): SpeedType {
     }
 }
 
-fun getSpeedStatus(type: SpeedType): String {
+fun getSpeedStatus(context: Context, type: SpeedType): String {
     return when (type) {
-        SpeedType.TOO_BAD -> "Отстой"
-        SpeedType.NORMAL -> "Нормально"
-        SpeedType.GOOD -> "Красава"
-        SpeedType.PERFECT -> "Огонь"
-        SpeedType.DOMINATING -> "Пушка"
-        SpeedType.IMPOSABLE -> "Пуля!"
+        SpeedType.TOO_BAD -> context.getString(R.string.sucks)
+        SpeedType.NORMAL -> context.getString(R.string.fine)
+        SpeedType.GOOD -> context.getString(R.string.nice)
+        SpeedType.PERFECT -> context.getString(R.string.fire)
+        SpeedType.DOMINATING -> context.getString(R.string.gun)
+        SpeedType.IMPOSABLE -> context.getString(R.string.bullet)
     }
 }
 

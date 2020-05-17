@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_start">스타트</string>
+    <string name="main_calculate_distance">거리 측정</string>
+
+    <string name="alert_title">주의!</string>
+    <string name="alert_message">충격 속도를 계산하려면 "카메라", "사운드"및 "레코딩"에 대한 권한이 필요합니다.</string>
+    <string name="alert_ok">확인</string>
+    <string name="ball_speed">볼 속도</string>
+
+    <string name="close">닫기</string>
+    <string name="share">이 공유</string>
+    <string name="measure_ball_speed">공의 속도를 측정</string>
+    <string name="instruction">사용 설명서</string>
+    <string name="main_tip_1">1 - 거리 측정 (10m)</string>
+    <string name="main_tip_2">2 - 적중</string>
+    <string name="cancel">취소</string>
+    <string name="settings">설정</string>
+    <string name="sensitive_microphone">마이크 감도</string>
+    <string name="measurement">측정 단위</string>
+    <string name="save">저장</string>
+
+    <string name="km_h">km/h</string>
+    <string name="mile_h">mph</string>
+    <string name="empty_data">데이터가 없습니다</string>
+    <string name="gps_coordinate">정확한 GPS 좌표 얻기</string>
+    <string name="alert_message_gps">거리 측정에 필요한 GPS 해상도</string>
+    <string name="start_and_move">시작 버튼을 누르고 10 미터 직진</string>
+    <string name="move">10 미터 직진</string>
+
+    <string name="sucks">짜증</string>
+    <string name="fine">좋아</string>
+    <string name="nice">좋은</string>
+    <string name="fire">불</string>
+    <string name="gun">총</string>
+    <string name="bullet">총알!</string>
+</resources>
