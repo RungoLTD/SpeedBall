@@ -2,8 +2,13 @@ package com.rungo.speedball.features.speedball.fragments
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +55,10 @@ class ResultFragment : BaseFragment() {
         setupListeners()
 
         binding.ivResult.setImageURI(viewModel.getUriImage())
+
+        val img: Bitmap = getCapturedImage(viewModel.getUriImage()!!)
+
+        binding.ivResult.setImageBitmap(rotateImageIfRequired(img, viewModel.getUriImage()))
 
         val speed = if (viewModel.getSpeedUnit()) {
             viewModel.getResult()?.speed?.div(1.6).toString()
@@ -108,5 +117,41 @@ class ResultFragment : BaseFragment() {
             .setQuality(Quality.HIGH)
             .setFlip(Flip.NOTHING)
             .getScreenshot()
+    }
+
+    private fun rotateImageIfRequired(img : Bitmap, selectedImage: Uri?): Bitmap {
+        var orientation: Int? = null
+
+        selectedImage?.path?.let {
+            orientation = ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+        }
+
+        return when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(img, 90)
+            ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(img, 180)
+            ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(img, 270)
+            else -> img
+        }
+    }
+
+    private fun rotateImage(img: Bitmap, degree: Int): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degree.toFloat())
+        val rotatedImg = Bitmap.createBitmap(img, 0, 0, img.width, img.height, matrix, true)
+        img.recycle()
+        return rotatedImg
+    }
+
+    private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap {
+        return when {
+            Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
+                requireActivity().contentResolver,
+                selectedPhotoUri
+            )
+            else -> {
+                val source = ImageDecoder.createSource(requireActivity().contentResolver, selectedPhotoUri)
+                ImageDecoder.decodeBitmap(source)
+            }
+        }
     }
 }

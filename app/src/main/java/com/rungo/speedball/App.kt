@@ -3,6 +3,7 @@ package com.rungo.speedball
 import android.app.Application
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.databinding.library.BuildConfig
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.rungo.speedball.di.persistenceModule
 import com.rungo.speedball.di.repositoryModule

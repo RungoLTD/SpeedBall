@@ -52,11 +52,7 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     private var camera: Camera? = null
     private lateinit var outputDirectory: File
 
-    private lateinit var cameraExecutor: ExecutorService
-
     private lateinit var speedManager: SpeedManager
-
-    private lateinit var photoFile: File
 
     private val displayManager by lazy {
         requireContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
@@ -65,6 +61,8 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     private val viewModel by lazy {
         getViewModel<SpeedBallViewModel>()
     }
+
+    private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = binding(layoutInflater, R.layout.fragment_camera, container)
@@ -85,7 +83,9 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
         displayManager.registerDisplayListener(displayListener, null)
 
         binding.viewFinder.post {
-            displayId = binding.viewFinder.display.displayId
+            binding.viewFinder.display?.let {
+                displayId = it.displayId
+            }
             updateCameraUi()
             bindCameraUseCases()
         }
@@ -247,17 +247,8 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
     override fun onDestroyView() {
         super.onDestroyView()
         cameraExecutor.shutdown()
+        Thread(speedManager).interrupt()
         displayManager.unregisterDisplayListener(displayListener)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Thread(speedManager).interrupt()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Thread(speedManager).interrupt()
     }
 
     override fun requestPermission() {

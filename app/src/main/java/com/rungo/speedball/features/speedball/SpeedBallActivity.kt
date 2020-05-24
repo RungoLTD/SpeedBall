@@ -1,31 +1,8 @@
 package com.rungo.speedball.features.speedball
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.hardware.display.DisplayManager
-import android.media.MediaScannerConnection
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
-import android.webkit.MimeTypeMap
-import androidx.camera.core.*
-import androidx.camera.core.impl.PreviewConfig
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
-import androidx.core.view.drawToBitmap
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
@@ -33,20 +10,11 @@ import com.rungo.speedball.BuildConfig
 import com.rungo.speedball.R
 import com.rungo.speedball.databinding.ActivitySpeedballBinding
 import com.rungo.speedball.features.base.BaseActivity
-import com.rungo.speedball.utils.*
-import com.tarek360.instacapture.Instacapture
-import com.tarek360.instacapture.listener.ScreenCaptureListener
-import kotlinx.android.synthetic.main.activity_speedball.*
+import com.rungo.speedball.utils.FLAGS_FULLSCREEN
 import org.koin.android.viewmodel.ext.android.getViewModel
-import timber.log.Timber
 import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import kotlin.math.abs
-import kotlin.math.max
 
 private const val IMMERSIVE_FLAG_TIMEOUT = 500L
 
@@ -117,14 +85,17 @@ class SpeedBallActivity : BaseActivity(), LifecycleOwner {
 
     override fun onDestroy() {
         super.onDestroy()
-        deleteFile()
         if (isFinishing) {
             mInterstitialAd.show()
+            deleteFile()
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        deleteFile()
+        if (isFinishing) {
+            mInterstitialAd.show()
+            deleteFile()
+        }
     }
 }

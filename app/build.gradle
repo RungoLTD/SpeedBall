@@ -115,4 +115,5 @@ dependencies {
 
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
+    implementation 'androidx.exifinterface:exifinterface:1.1.0-beta01'
 }
