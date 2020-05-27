@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.rungo.speedball.features.speedball.fragments.CameraFragment"
+        android:name="com.myrungo.speedball.features.speedball.fragments.CameraFragment"
         android:label="CameraFragment"
         tools:layout="@layout/fragment_camera"/>
 
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.rungo.speedball.features.speedball.fragments.ResultFragment"
+        android:name="com.myrungo.speedball.features.speedball.fragments.ResultFragment"
         android:label="ResultFragment"
         tools:layout="@layout/fragment_result"/>
 </navigation>
