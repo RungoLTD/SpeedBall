@@ -15,14 +15,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="158dp"
+            android:layout_height="@dimen/_128sdp"
             android:background="@color/colorBlackTransparency"
             android:layout_alignParentBottom="true">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="80dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginStart="24dp"
                 android:src="@drawable/ic_logo"/>
 
@@ -31,8 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:layout_marginTop="16dp"
+                android:textSize="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:layout_centerHorizontal="true"
                 android:text="@string/ball_speed"
                 tools:ignore="SmallSp" />
@@ -45,7 +45,7 @@
                 android:layout_below="@id/tvSpeedTitle"
                 android:layout_alignStart="@id/tvSpeedTitle"
                 android:textStyle="bold"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 tools:text="72,83" />
 
             <TextView
@@ -53,11 +53,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:textSize="10sp"
+                android:textSize="@dimen/_10ssp"
                 android:layout_alignBottom="@id/tvSpeedCount"
                 android:layout_below="@id/tvSpeedTitle"
                 android:layout_toEndOf="@id/tvSpeedCount"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:gravity="bottom"
                 tools:text="km/h"
                 tools:ignore="SmallSp" />
@@ -68,18 +68,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:textColor="@android:color/white"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="@dimen/_24sdp"
                 android:layout_marginTop="16dp"
                 android:textStyle="bold"
                 android:text="Красава"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnClose"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_24sdp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="64dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginBottom="@dimen/_34sdp"
+                android:layout_marginStart="@dimen/_24sdp"
                 android:text="@string/close"
                 android:textAllCaps="false"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -88,16 +88,16 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnShare"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_24sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="64dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="@dimen/_34sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
                 android:text="@string/share"
                 android:textAllCaps="false"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:drawableStart="@drawable/ic_share"
                 android:textColor="@android:color/white"

@@ -4,21 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:layout_width="match_parent"
         android:background="@android:color/white"
-        android:layout_height="60dp">
+        android:layout_height="@dimen/_60sdp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSpeedState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_16sdp"
             tools:text="72 км/ч - Отстой"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/tvSpeedState"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:textColor="@color/colorGray"
             tools:text="12 декабря 2020 г., 20:00"/>
 
@@ -35,8 +35,8 @@
             android:id="@+id/tvEmoji"
             android:layout_toEndOf="@id/tvSpeedState"
             android:layout_centerVertical="true"
-            android:layout_marginStart="40dp"
-            android:textSize="30sp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:textSize="@dimen/_30ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />

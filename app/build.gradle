@@ -13,8 +13,8 @@ android {
         applicationId "com.myrungo.speedball"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -116,4 +116,10 @@ dependencies {
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
     implementation 'androidx.exifinterface:exifinterface:1.1.0-beta01'
+
+    //SDP
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    //SSP
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
 }

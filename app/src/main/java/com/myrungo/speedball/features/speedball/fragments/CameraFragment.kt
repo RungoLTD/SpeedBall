@@ -91,6 +91,10 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
         speedManager = SpeedManager(requireActivity(), viewModel.sensitive, this)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
         Thread(speedManager).start()
     }
 

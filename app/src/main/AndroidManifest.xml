@@ -24,7 +24,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5203994867346463~1530263117"/>
+            android:value="ca-app-pub-5203994867346463~1530263117" />
 
         <activity
             android:name="com.myrungo.speedball.features.splash.SplashActivity"
@@ -49,9 +49,11 @@
             android:name="com.myrungo.speedball.features.distance.DistanceActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.myrungo.speedball.features.speedball.SpeedBallActivity"
-            android:theme="@style/CameraTheme"
-            android:screenOrientation="fullSensor"/>
+        <activity
+            android:name="com.myrungo.speedball.features.speedball.SpeedBallActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/CameraTheme" />
     </application>
 
 </manifest>

@@ -12,20 +12,20 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:background="@android:color/black"
-            android:layout_height="60dp">
+            android:layout_height="@dimen/_48sdp">
 
             <ImageView
                 android:id="@+id/imgBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginStart="16dp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_arrow"/>
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_logo"/>
 
@@ -43,7 +43,7 @@
             android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_statistic"/>

@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_6sdp"
                 app:srcCompat="@drawable/ic_logo" />
 
             <TextView
@@ -30,7 +30,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/measure_ball_speed"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
 
             <TextView
@@ -38,10 +38,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:text="@string/instruction"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_12ssp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -50,17 +50,17 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFirstTip"
                     android:layout_width="wrap_content"
-                    android:layout_height="146dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_height="@dimen/_106sdp"
+                    android:layout_marginStart="@dimen/_60sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:src="@drawable/ic_measure_distance" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ivFirstTip"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="@dimen/_46sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
                     android:text="@string/main_tip_1"
                     android:textColor="@android:color/white" />
@@ -68,10 +68,10 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivSecondTip"
                     android:layout_width="wrap_content"
-                    android:layout_height="140dp"
+                    android:layout_height="@dimen/_106sdp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_26sdp"
                     android:src="@drawable/ic_kick" />
 
                 <TextView
@@ -80,7 +80,7 @@
                     android:layout_below="@id/ivFirstTip"
                     android:layout_alignStart="@id/ivSecondTip"
                     android:layout_alignEnd="@id/ivSecondTip"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
                     android:text="@string/main_tip_2"
                     android:textColor="@android:color/white" />
@@ -89,10 +89,10 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnStart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:layout_marginEnd="42dp"
-                android:layout_marginTop="42dp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_36sdp"
+                android:layout_marginEnd="@dimen/_36sdp"
+                android:layout_marginTop="@dimen/_32sdp"
                 android:background="@drawable/ic_button_start"
                 android:text="@string/main_start"
                 android:textColor="@android:color/white"
@@ -101,15 +101,15 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCalculate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:layout_marginEnd="42dp"
-                android:layout_marginTop="24dp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_36sdp"
+                android:layout_marginEnd="@dimen/_36sdp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:background="@drawable/ic_button_distance"
                 android:drawableStart="@drawable/ic_linear"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:paddingStart="16dp"
-                android:paddingEnd="32dp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_26sdp"
                 android:text="@string/main_calculate_distance"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -117,10 +117,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="24dp">
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_36sdp"
+                android:layout_marginEnd="@dimen/_36sdp"
+                android:layout_marginBottom="@dimen/_18sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivSettings"
@@ -144,4 +144,3 @@
         </LinearLayout>
     </ScrollView>
 </layout>
-
