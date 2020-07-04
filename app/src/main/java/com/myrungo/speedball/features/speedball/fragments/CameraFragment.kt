@@ -12,6 +12,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -91,6 +92,16 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
         speedManager = SpeedManager(requireActivity(), viewModel.sensitive, this)
 
+        val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            params.setMargins(resources.getDimension(R.dimen._60sdp).toInt(), 0, resources.getDimension(R.dimen._60sdp).toInt(), resources.getDimension(R.dimen._14sdp).toInt())
+            binding.btnCancel.layoutParams = params
+        } else {
+            params.setMargins(resources.getDimension(R.dimen._180sdp).toInt(), 0, resources.getDimension(R.dimen._180sdp).toInt(), resources.getDimension(R.dimen._14sdp).toInt())
+            binding.btnCancel.layoutParams = params
+        }
     }
 
     override fun onResume() {
@@ -244,6 +255,17 @@ class CameraFragment : BaseFragment(), SpeedManagerListener {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
+        val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            params.setMargins(resources.getDimension(R.dimen._60sdp).toInt(), 0, resources.getDimension(R.dimen._60sdp).toInt(), resources.getDimension(R.dimen._14sdp).toInt())
+            binding.btnCancel.layoutParams = params
+        } else {
+            params.setMargins(resources.getDimension(R.dimen._180sdp).toInt(), 0, resources.getDimension(R.dimen._180sdp).toInt(), resources.getDimension(R.dimen._14sdp).toInt())
+            binding.btnCancel.layoutParams = params
+        }
+
         updateCameraUi()
     }
 

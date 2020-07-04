@@ -1,6 +1,7 @@
 package com.myrungo.speedball.features.speedball.fragments
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.Matrix
@@ -12,6 +13,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.core.net.toUri
 import com.mindorks.Screenshot
 import com.mindorks.properties.Flip
@@ -21,6 +24,8 @@ import com.myrungo.speedball.data.model.getSpeedEmoji
 import com.myrungo.speedball.data.model.getSpeedStatus
 import com.myrungo.speedball.data.model.getSpeedType
 import com.myrungo.speedball.databinding.FragmentResultBinding
+import com.myrungo.speedball.databinding.LayoutResultLandscapeBinding
+import com.myrungo.speedball.databinding.LayoutResultPortraitBinding
 import com.myrungo.speedball.features.base.BaseFragment
 import com.myrungo.speedball.features.speedball.SpeedBallActivity
 import com.myrungo.speedball.features.speedball.SpeedBallViewModel
@@ -39,13 +44,15 @@ class ResultFragment : BaseFragment() {
         getViewModel<SpeedBallViewModel>()
     }
 
+    private val portraitBinding by lazy { LayoutResultPortraitBinding.inflate(LayoutInflater.from(requireContext())) }
+    private val landscapeBinding by lazy { LayoutResultLandscapeBinding.inflate(LayoutInflater.from(requireContext())) }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = binding(layoutInflater, R.layout.fragment_result, container)
-
         return binding.root
     }
 
@@ -60,29 +67,23 @@ class ResultFragment : BaseFragment() {
 
         binding.ivResult.setImageBitmap(rotateImageIfRequired(img, viewModel.getUriImage()))
 
-        val speed = if (viewModel.getSpeedUnit()) {
-            viewModel.getResult()?.speed?.div(1.6).toString()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            initUi(landscapeBinding.tvSpeedCount, landscapeBinding.tvStatus, landscapeBinding.tvSpeedParameter, resources.getDimension(R.dimen._52sdp).toInt())
+            binding.layoutResult.addView(landscapeBinding.root)
         } else {
-            viewModel.getResult()?.speed.toString()
-        }
-
-        binding.tvSpeedCount.text = speed
-
-        binding.tvStatus.text = viewModel.getResult()?.speed?.let {
-            getSpeedStatus(requireContext(), getSpeedType(it)) + " " + getSpeedEmoji(getSpeedType(it))
-        }
-
-        binding.tvSpeedParameter.text = if (viewModel.getSpeedUnit()) {
-            getString(R.string.mile_h)
-        } else {
-            getString(R.string.km_h)
+            initUi(portraitBinding.tvSpeedCount, portraitBinding.tvStatus, portraitBinding.tvSpeedParameter, resources.getDimension(R.dimen._128sdp).toInt())
+            binding.layoutResult.addView(portraitBinding.root)
         }
     }
 
     private fun getImageUri(): Uri {
         val outputDirectory = SpeedBallActivity.getOutputDirectory(requireContext())
 
-        val photoFile = SpeedBallActivity.createFile(outputDirectory, SpeedBallActivity.FILENAME, SpeedBallActivity.PHOTO_EXTENSION)
+        val photoFile = SpeedBallActivity.createFile(
+            outputDirectory,
+            SpeedBallActivity.FILENAME,
+            SpeedBallActivity.PHOTO_EXTENSION
+        )
 
         val os: OutputStream = BufferedOutputStream(FileOutputStream(photoFile))
         screenShot(binding.root)?.compress(Bitmap.CompressFormat.PNG, 100, os)
@@ -93,11 +94,11 @@ class ResultFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
-        binding.btnClose.setOnClickListener {
+        portraitBinding.btnClose.setOnClickListener {
             requireActivity().finish()
         }
 
-        binding.btnShare.setOnClickListener {
+        portraitBinding.btnShare.setOnClickListener {
             val bitmapUri = getImageUri()
             val shareIntent = Intent()
 
@@ -107,7 +108,30 @@ class ResultFragment : BaseFragment() {
                 putExtra(Intent.EXTRA_STREAM, bitmapUri)
             }
 
-            startActivityForResult(Intent.createChooser(shareIntent, "Speedball"), Constants.SHARE_IMAGE)
+            startActivityForResult(
+                Intent.createChooser(shareIntent, "Speedball"),
+                Constants.SHARE_IMAGE
+            )
+        }
+
+        landscapeBinding.btnClose.setOnClickListener {
+            requireActivity().finish()
+        }
+
+        landscapeBinding.btnShare.setOnClickListener {
+            val bitmapUri = getImageUri()
+            val shareIntent = Intent()
+
+            shareIntent.apply {
+                action = Intent.ACTION_SEND
+                type = "image/jpg"
+                putExtra(Intent.EXTRA_STREAM, bitmapUri)
+            }
+
+            startActivityForResult(
+                Intent.createChooser(shareIntent, "Speedball"),
+                Constants.SHARE_IMAGE
+            )
         }
     }
 
@@ -119,11 +143,14 @@ class ResultFragment : BaseFragment() {
             .getScreenshot()
     }
 
-    private fun rotateImageIfRequired(img : Bitmap, selectedImage: Uri?): Bitmap {
+    private fun rotateImageIfRequired(img: Bitmap, selectedImage: Uri?): Bitmap {
         var orientation: Int? = null
 
         selectedImage?.path?.let {
-            orientation = ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+            orientation = ExifInterface(it).getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            )
         }
 
         return when (orientation) {
@@ -149,9 +176,53 @@ class ResultFragment : BaseFragment() {
                 selectedPhotoUri
             )
             else -> {
-                val source = ImageDecoder.createSource(requireActivity().contentResolver, selectedPhotoUri)
+                val source =
+                    ImageDecoder.createSource(requireActivity().contentResolver, selectedPhotoUri)
                 ImageDecoder.decodeBitmap(source)
             }
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when (newConfig.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                binding.layoutResult.removeAllViews()
+                initUi(portraitBinding.tvSpeedCount, portraitBinding.tvStatus, portraitBinding.tvSpeedParameter, resources.getDimension(R.dimen._128sdp).toInt())
+                binding.layoutResult.addView(portraitBinding.root)
+            }
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                binding.layoutResult.removeAllViews()
+                initUi(landscapeBinding.tvSpeedCount, landscapeBinding.tvStatus, landscapeBinding.tvSpeedParameter, resources.getDimension(R.dimen._52sdp).toInt())
+                binding.layoutResult.addView(landscapeBinding.root)
+            }
+        }
+    }
+
+    private fun initUi(speedCount: TextView, status: TextView, speedParam: TextView, size: Int) {
+        val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, size)
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+        binding.layoutResult.layoutParams = params
+
+        val speed = if (viewModel.getSpeedUnit()) {
+            viewModel.getResult()?.speed?.div(1.6).toString()
+        } else {
+            viewModel.getResult()?.speed.toString()
+        }
+
+        speedCount.text = speed
+
+        status.text = viewModel.getResult()?.speed?.let {
+            getSpeedStatus(
+                requireContext(),
+                getSpeedType(it)
+            ) + " " + getSpeedEmoji(getSpeedType(it))
+        }
+
+        speedParam.text = if (viewModel.getSpeedUnit()) {
+            getString(R.string.mile_h)
+        } else {
+            getString(R.string.km_h)
         }
     }
 }
